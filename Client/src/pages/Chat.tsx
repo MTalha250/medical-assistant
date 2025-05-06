@@ -76,8 +76,8 @@ const MedicalAssistant = () => {
       role: "user",
       content: input,
     };
-    setMessages((prev) => [...prev, userMessage]);
     await storeMessage(userMessage);
+    setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
     setInput("");
     try {
@@ -86,8 +86,8 @@ const MedicalAssistant = () => {
         role: "assistant",
         content: response,
       };
-      setMessages((prev) => [...prev, assistantMessage]);
       await storeMessage(assistantMessage);
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error generating response:", error);
       setMessages((prev) => [

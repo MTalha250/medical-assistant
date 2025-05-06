@@ -25,7 +25,7 @@ const Login = () => {
       setUser(user);
       setToken(token);
       setLoading(false);
-      toast.success("Logined successfully");
+      toast.success("Logged in successfully");
       navigate("/chat");
     } catch (error: any) {
       setLoading(false);
