@@ -166,10 +166,10 @@ const MedicalAssistant = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 w-full h-screen bg-gray-900">
+    <div className="p-4 md:p-8 w-full h-dvh bg-gray-900">
       <div className="overflow-hidden w-full flex flex-col rounded-xl h-full border border-gray-700">
         <div className="bg-gray-800 p-4 border-b border-gray-700 flex items-center justify-between">
-          <h1 className="font-bold text-2xl text-white flex items-center justify-center">
+          <h1 className="font-bold text-xl sm:text-2xl text-white flex items-center justify-center">
             <FaRobot className="mr-2 text-blue-400" />
             AI Medical Assistant
           </h1>
@@ -187,7 +187,7 @@ const MedicalAssistant = () => {
           </button>
         </div>
 
-        <div className="flex h-full">
+        <div className="flex h-[calc(100% - 4rem)] md:h-[calc(100%-4rem)]">
           <div className="h-full flex flex-col justify-between p-4 w-full bg-gray-900">
             <ScrollArea className="flex-grow pr-4">
               <div className="space-y-4 pb-4">
