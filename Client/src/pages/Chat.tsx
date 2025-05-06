@@ -166,11 +166,11 @@ const MedicalAssistant = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 w-full h-dvh bg-gray-900">
+    <div className="p-4 md:p-8 w-full h-svh bg-gray-900">
       <div className="overflow-hidden w-full flex flex-col rounded-xl h-full border border-gray-700">
         <div className="bg-gray-800 p-4 border-b border-gray-700 flex items-center justify-between">
-          <h1 className="font-bold text-xl sm:text-2xl text-white flex items-center justify-center">
-            <FaRobot className="mr-2 text-blue-400" />
+          <h1 className="font-bold text-lg sm:text-2xl text-white flex items-center justify-center">
+            <FaRobot className="mr-2 text-blue-400 shrink-0" />
             AI Medical Assistant
           </h1>
           <button
@@ -187,7 +187,7 @@ const MedicalAssistant = () => {
           </button>
         </div>
 
-        <div className="flex h-[calc(100% - 4rem)] md:h-[calc(100%-4rem)]">
+        <div className="flex h-[84vh] md:h-[82vh]">
           <div className="h-full flex flex-col justify-between p-4 w-full bg-gray-900">
             <ScrollArea className="flex-grow pr-4">
               <div className="space-y-4 pb-4">
@@ -270,7 +270,7 @@ const MedicalAssistant = () => {
                   onClick={clearChat}
                   className="mr-2 bg-red-900 hover:bg-red-800"
                 >
-                  <MdOutlineClear className="text-xl text-white" />
+                  <MdOutlineClear className="sm:text-xl text-white" />
                 </Button>
                 <Input
                   className="mx-2 bg-gray-800 border-gray-700 text-white"
@@ -284,7 +284,7 @@ const MedicalAssistant = () => {
                   className="bg-blue-700 hover:bg-blue-600"
                   disabled={loading || !input.trim()}
                 >
-                  <GrSend className="text-xl text-white" />
+                  <GrSend className="sm:text-xl text-white" />
                 </Button>
               </form>
             </div>
