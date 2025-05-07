@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-const MessageSchema = new mongoose.Schema(
+const RecordSchema = new mongoose.Schema(
   {
-    role: {
+    title: {
       type: String,
       required: true,
     },
-    content: {
+    description: {
       type: String,
     },
-    image: {
+    fileUrl: {
       type: String,
     },
   },
@@ -17,6 +17,6 @@ const MessageSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const MessageModel = mongoose.model("Message", MessageSchema);
+const RecordModel = mongoose.model("Record", RecordSchema);
 
-export default MessageModel;
+export default RecordModel;

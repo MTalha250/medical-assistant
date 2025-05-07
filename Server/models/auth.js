@@ -21,6 +21,12 @@ const AuthSchema = new mongoose.Schema(
         ref: "Message",
       },
     ],
+    records: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Record",
+      },
+    ],
   },
   {
     timestamps: true,

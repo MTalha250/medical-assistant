@@ -5,10 +5,10 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import messageRoutes from "./routes/message.js";
-
+import recordRoutes from "./routes/record.js";
 dotenv.config();
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(
   cors({
@@ -37,6 +37,7 @@ db.on("disconnected", () => {
 //Routes
 app.use("/auth", authRoutes);
 app.use("/messages", messageRoutes);
+app.use("/records", recordRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");

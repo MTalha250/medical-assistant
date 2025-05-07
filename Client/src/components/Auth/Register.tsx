@@ -6,6 +6,7 @@ import useAuthStore from "@/store/authStore";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaSpinner } from "react-icons/fa";
+
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -26,8 +27,8 @@ const Register = () => {
       setUser(user);
       setToken(token);
       setLoading(false);
-      toast.success("Registered Successfullly");
-      navigate("/chat");
+      toast.success("Registered Successfully");
+      navigate("/dashboard");
     } catch (error: any) {
       setLoading(false);
       if (error.response?.data === "User already exists") {
@@ -37,41 +38,50 @@ const Register = () => {
       toast.error("Something went wrong, please try again");
     }
   };
+
   return (
     <div className="h-full flex items-center justify-center">
       <form onSubmit={(e) => handleSubmit(e)} className="w-full max-w-md px-8">
-        <h1 className="font-bold text-3xl my-2">Create an account</h1>
-        <p className="mb-5 text-sm text-gray-500">
+        <h1 className="font-bold text-3xl my-2 text-slate">
+          Create an account
+        </h1>
+        <p className="mb-5 text-sm text-slate/70">
           Enter your name, email and password below to create an account
         </p>
+
         <Input
-          className="my-3 bg-gray-800 border-gray-700 text-white"
+          className="my-3 bg-skyBlue/10 border-skyBlue hover:border-slate focus-visible:ring-1 focus-visible:ring-slate focus-visible:border-slate text-slate placeholder-slate/50 rounded-lg"
           type="text"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+
         <Input
-          className="my-3 bg-gray-800 border-gray-700 text-white"
+          className="my-3 bg-skyBlue/10 border-skyBlue hover:border-slate focus-visible:ring-1 focus-visible:ring-slate focus-visible:border-slate text-slate placeholder-slate/50 rounded-lg"
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <Input
-          className="my-3 bg-gray-800 border-gray-700 text-white"
+          className="my-3 bg-skyBlue/10 border-skyBlue hover:border-slate focus-visible:ring-1 focus-visible:ring-slate focus-visible:border-slate text-slate placeholder-slate/50 rounded-lg"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button className="my-2 w-full bg-blue-900/30 border border-blue-700 text-blue-100 hover:bg-blue-900/50">
+
+        <Button className="my-2 w-full bg-slate hover:bg-slate/90 text-white rounded-lg py-6 font-medium shadow-sm transition-colors">
           {!loading ? "Register" : <FaSpinner className="animate-spin" />}
         </Button>
-        <p className="mt-5 text-sm text-gray-500">Already have an account?</p>
+
+        <p className="mt-5 text-sm text-slate/70">Already have an account?</p>
+
         <Link
           to="/"
-          className="h-10 px-4 py-2 text-center inline-block rounded-md my-2 w-full bg-blue-900/30 border border-blue-700 text-blue-100 hover:bg-blue-900/50 text-sm"
+          className="h-10 px-4 py-2 text-center inline-flex items-center justify-center rounded-lg my-2 w-full bg-peach hover:bg-peach/90 text-slate font-medium transition-colors shadow-sm"
         >
           Sign In
         </Link>

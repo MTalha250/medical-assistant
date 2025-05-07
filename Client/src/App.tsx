@@ -3,8 +3,10 @@ import Layout from "@/Layout";
 import Home from "@/pages/Home";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import Chat from "./pages/Chat";
-
+import Dashboard from "./pages/Dashboard";
+import Assistant from "./components/Dashboard/Assistant";
+import Resources from "./components/Dashboard/Resources";
+import Records from "./components/Dashboard/Records";
 function App() {
   return (
     <Routes>
@@ -13,7 +15,11 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/dashboard" element={<Assistant />} />
+          <Route path="/dashboard/resources" element={<Resources />} />
+          <Route path="/dashboard/records" element={<Records />} />
+        </Route>
       </Route>
     </Routes>
   );

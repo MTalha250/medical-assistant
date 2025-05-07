@@ -37,10 +37,11 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     // Check if the user exists
-    const user = await AuthModel.findOne({ email }).populate("messages");
-
+    const user = await AuthModel.findOne({ email }).populate(
+      "messages records"
+    );
+    console.log(user);
     if (!user) {
       return res.status(404).send("User doesn't exist");
     }
@@ -68,7 +69,9 @@ export const login = async (req, res) => {
 //getUser
 export const getUser = async (req, res) => {
   try {
-    const user = await AuthModel.findById(req.userId).populate("messages");
+    const user = await AuthModel.findById(req.userId).populate(
+      "messages records"
+    );
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({ message: error.message });

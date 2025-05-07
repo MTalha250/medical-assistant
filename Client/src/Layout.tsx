@@ -21,7 +21,7 @@ const Layout = () => {
       if (res?.token) {
         setToken(res.token);
       }
-      navigate("/chat");
+      navigate("/dashboard");
     } catch (error: any) {
       logout();
       toast("Session expired");
@@ -29,7 +29,7 @@ const Layout = () => {
     }
   };
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div className="bg-peach/50 text-slate min-h-screen">
       <Outlet />
       <Toaster
         position="bottom-right"

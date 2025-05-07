@@ -3,11 +3,12 @@ import AuthModel from "../models/auth.js";
 
 export const createMessage = async (req, res) => {
   try {
-    const { role, content } = req.body;
+    const { role, content, image } = req.body;
     const id = req.userId;
     const newMessage = await MessageModel.create({
       role,
       content,
+      image,
     });
     const user = await AuthModel.findById(id);
     if (!user) {

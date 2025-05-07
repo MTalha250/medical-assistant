@@ -19,6 +19,12 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        peach: "#FFDBBB",
+        skyBlue: "#BADDFF",
+        mint: "#BAFFF5",
+        slate: "#496580",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
