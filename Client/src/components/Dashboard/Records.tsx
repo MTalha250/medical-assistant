@@ -115,7 +115,7 @@ const Records = () => {
 
   return (
     <div className="flex flex-col h-full w-full overflow-hidden bg-white">
-      <div className="py-4 px-6 bg-gradient-to-r from-slate to-[#3A526A] border-b border-slate/10 flex items-center justify-between">
+      <div className="py-4 px-2 sm:px-6 bg-gradient-to-r from-slate to-[#3A526A] border-b border-slate/10 flex items-center justify-between">
         <div className="flex items-center">
           <div className="bg-peach p-2 rounded-full mr-3">
             <FaFile className="text-slate text-xl" />
@@ -174,7 +174,7 @@ const Records = () => {
       </div>
 
       <div className="flex-1 flex flex-col h-[calc(100%-4rem)] overflow-hidden">
-        <div className="px-6 pt-6">
+        <div className="px-2 sm:px-6 pt-6">
           <Card className="bg-skyBlue/20 border border-skyBlue rounded-xl p-4 text-slate">
             <p className="text-sm">
               Your medical records are stored securely. You can add new records,
@@ -183,7 +183,7 @@ const Records = () => {
           </Card>
         </div>
 
-        <ScrollArea className="flex-1 px-6 pt-4 pb-2">
+        <ScrollArea className="flex-1 px-2 sm:px-6 pt-4 pb-2">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {records.map((record) => (
               <Card

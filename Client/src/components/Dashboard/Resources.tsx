@@ -140,7 +140,7 @@ const Resources = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-2 sm:p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate mb-2">
           Medical Resources
@@ -184,7 +184,7 @@ const Resources = () => {
         ))}
       </div>
 
-      <div className="mt-8 p-6 bg-skyBlue/10 rounded-lg border border-skyBlue">
+      <div className="mt-8 p-2 sm:p-6 bg-skyBlue/10 rounded-lg border border-skyBlue">
         <h2 className="text-xl font-semibold text-slate mb-4">
           Important Notice
         </h2>

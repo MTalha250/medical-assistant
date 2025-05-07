@@ -271,7 +271,7 @@ const MedicalAssistant = () => {
 
   return (
     <div className="flex flex-col h-full w-full overflow-hidden bg-white">
-      <div className="py-4 px-6 bg-gradient-to-r from-slate to-[#3A526A] border-b border-slate/10 flex items-center justify-between">
+      <div className="py-4 px-2 sm:px-6 bg-gradient-to-r from-slate to-[#3A526A] border-b border-slate/10 flex items-center justify-between">
         <div className="flex items-center">
           <div className="bg-peach p-2 rounded-full mr-3">
             <FaRobot className="text-slate text-xl" />
@@ -288,7 +288,7 @@ const MedicalAssistant = () => {
         </Button>
       </div>
       <div className="flex-1 flex flex-col h-[calc(100%-4rem)] overflow-hidden">
-        <div className="px-6 pt-6">
+        <div className="px-2 sm:px-6 pt-6">
           <Card className="bg-skyBlue/20 border border-skyBlue rounded-xl p-4 text-slate">
             <p className="text-sm">
               This AI assistant provides general medical information only. It is
@@ -298,7 +298,7 @@ const MedicalAssistant = () => {
             </p>
           </Card>
         </div>
-        <ScrollArea className="flex-1 px-6 pt-4 pb-2">
+        <ScrollArea className="flex-1 px-2 sm:px-6 pt-4 pb-2">
           <div className="space-y-6">
             {messages.map((message, index) => (
               <div
@@ -308,7 +308,7 @@ const MedicalAssistant = () => {
                 }`}
               >
                 <div
-                  className={`flex items-start max-w-[80%] ${
+                  className={`flex items-start max-w-full sm:max-w-[80%] ${
                     message.role === "user" ? "flex-row-reverse" : ""
                   }`}
                 >
@@ -379,7 +379,7 @@ const MedicalAssistant = () => {
             <div ref={messagesEndRef} />
           </div>
         </ScrollArea>
-        <div className="px-6 py-4 border-t border-slate/10 bg-white">
+        <div className="px-2 sm:px-6 py-4 border-t border-slate/10 bg-white">
           <form onSubmit={sendMessage} className="flex flex-col gap-2">
             {selectedImage && (
               <div className="relative inline-block">
