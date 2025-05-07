@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import useAuthStore from "@/store/authStore";
 import { loginBack, logout } from "@/hooks/auth";
 import { useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   const { setUser, setToken } = useAuthStore();
