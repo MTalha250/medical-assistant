@@ -24,7 +24,6 @@ const Layout = () => {
       navigate("/dashboard");
     } catch (error: any) {
       logout();
-      toast("Session expired");
       navigate("/");
     }
   };

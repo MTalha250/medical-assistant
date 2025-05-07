@@ -15,11 +15,12 @@ import toast from "react-hot-toast";
 
 interface SidebarProps {
   onLogout: () => void;
+  mobileOpen: boolean;
+  setMobileOpen: (open: boolean) => void;
 }
 
-const Sidebar = ({ onLogout }: SidebarProps) => {
+const Sidebar = ({ onLogout, mobileOpen, setMobileOpen }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const { user } = useAuthStore();
   const location = useLocation();
 
@@ -72,26 +73,12 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
 
   return (
     <>
-      {/* Mobile Menu Toggle */}
-      <div className="md:hidden fixed top-4 left-4 z-30">
-        <button
-          className="p-3 bg-slate text-white rounded-full shadow-md hover:opacity-90 transition-opacity"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-        </button>
-      </div>
-
-      {/* Overlay for mobile */}
       {mobileOpen && (
         <div
           className="md:hidden fixed inset-0 bg-slate/30 backdrop-blur-sm z-20"
           onClick={() => setMobileOpen(false)}
         />
       )}
-
-      {/* Sidebar */}
       <div
         className={`
           fixed left-0 top-0 h-full bg-gradient-to-b from-slate to-[#3A526A] text-white
@@ -101,7 +88,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
           shadow-lg
         `}
       >
-        {/* Collapse toggle (desktop only) */}
         <div className="hidden md:block absolute -right-3 top-10 z-10">
           <button
             className="p-1.5 bg-peach text-slate rounded-full shadow-md hover:bg-peach/90 transition-colors"
@@ -111,8 +97,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
             {collapsed ? <FaBars size={12} /> : <FaTimes size={12} />}
           </button>
         </div>
-
-        {/* Logo and user info */}
         <div className="px-6 pt-8 pb-6 border-b border-white/10">
           <div className="flex items-center justify-center md:justify-start mb-8">
             <div
@@ -130,8 +114,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
               )}
             </div>
           </div>
-
-          {/* User profile */}
           <div
             className={`p-4 bg-white/10 rounded-xl ${
               collapsed ? "flex flex-col items-center" : ""
@@ -153,8 +135,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
             </div>
           </div>
         </div>
-
-        {/* Navigation */}
         <nav className="flex-1 px-4 py-6">
           <ul className="space-y-2">
             {navItems.map((item) => (
@@ -176,15 +156,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
                   <span className="flex-shrink-0">{item.icon}</span>
 
                   {!collapsed && <span className="ml-3">{item.label}</span>}
-
-                  {/* Tooltip for collapsed state */}
-                  {collapsed && (
-                    <div className="absolute left-full ml-4 px-3 py-2 bg-slate text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-md border border-white/10">
-                      {item.label}
-                    </div>
-                  )}
-
-                  {/* Active indicator */}
                   {isActive(item.path) && !collapsed && (
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 h-2 w-2 rounded-full bg-white"></div>
                   )}
@@ -193,8 +164,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
             ))}
           </ul>
         </nav>
-
-        {/* Logout */}
         <div className="p-6 mt-auto border-t border-white/10">
           <button
             onClick={handleLogout}
@@ -209,8 +178,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
             <FaSignOutAlt size={20} />
 
             {!collapsed && <span className="ml-3">Logout</span>}
-
-            {/* Tooltip for collapsed state */}
             {collapsed && (
               <div className="absolute left-full ml-4 px-3 py-2 bg-slate text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-md border border-white/10">
                 Logout
@@ -219,8 +186,6 @@ const Sidebar = ({ onLogout }: SidebarProps) => {
           </button>
         </div>
       </div>
-
-      {/* Main content spacer */}
       <div
         className={`transition-all duration-300 ${
           collapsed ? "md:ml-24" : "md:ml-72"

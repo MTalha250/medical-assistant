@@ -27,7 +27,7 @@ const Records = () => {
   const [fileUrl, setFileUrl] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { token, user } = useAuthStore();
+  const { token, user, setUser } = useAuthStore();
 
   useEffect(() => {
     if (user) {
@@ -51,6 +51,12 @@ const Records = () => {
       const newRecord = response.data;
 
       setRecords((prev) => [...prev, newRecord]);
+      if (user) {
+        setUser({
+          ...user,
+          records: [...user.records, newRecord],
+        });
+      }
       setTitle("");
       setDescription("");
       setFileUrl("");
@@ -74,6 +80,12 @@ const Records = () => {
         }
       );
       setRecords((prev) => prev.filter((record) => record._id !== id));
+      if (user) {
+        setUser({
+          ...user,
+          records: user.records.filter((record) => record._id !== id),
+        });
+      }
       toast.success("Record deleted successfully");
     } catch (error) {
       console.error("Error deleting record:", error);

@@ -36,7 +36,7 @@ const MedicalAssistant = () => {
   const [copiedMessageId, setCopiedMessageId] = useState<number | null>(null);
   const [selectedImage, setSelectedImage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { user, token } = useAuthStore();
+  const { user, token, setUser } = useAuthStore();
   const navigate = useNavigate();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API });
@@ -140,19 +140,32 @@ const MedicalAssistant = () => {
       image: selectedImage || undefined,
     };
 
-    await storeMessage(userMessage);
     setMessages((prev) => [...prev, userMessage]);
-    setLoading(true);
+    await storeMessage(userMessage);
+    if (user) {
+      setUser({
+        ...user,
+        messages: [...user.messages, userMessage],
+      });
+    }
     setInput("");
     setSelectedImage("");
+
     try {
+      setLoading(true);
       const response = await generateAIResponse(input, selectedImage);
       const assistantMessage = {
         role: "assistant",
         content: response,
       };
-      await storeMessage(assistantMessage);
       setMessages((prev) => [...prev, assistantMessage]);
+      await storeMessage(assistantMessage);
+      if (user) {
+        setUser({
+          ...user,
+          messages: [...user.messages, assistantMessage],
+        });
+      }
     } catch (error) {
       console.error("Error generating response:", error);
       setMessages((prev) => [
@@ -218,6 +231,12 @@ const MedicalAssistant = () => {
             "Chat history cleared. How can I help you with your medical questions today?",
         },
       ]);
+      if (user) {
+        setUser({
+          ...user,
+          messages: [],
+        });
+      }
       toast.success("Chat history cleared successfully");
     } catch (error) {
       console.error("Error clearing chat:", error);
