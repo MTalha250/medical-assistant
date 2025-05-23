@@ -83,7 +83,9 @@ const Records = () => {
       if (user) {
         setUser({
           ...user,
-          records: user.records.filter((record) => record._id !== id),
+          records: user.records.filter(
+            (record: { _id: string }) => record._id !== id
+          ),
         });
       }
       toast.success("Record deleted successfully");
