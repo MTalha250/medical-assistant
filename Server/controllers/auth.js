@@ -72,9 +72,19 @@ export const getUser = async (req, res) => {
     const user = await AuthModel.findById(req.userId).populate(
       "messages records"
     );
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Auto-update users with old default model to new default
+    if (!user.selectedModel || user.selectedModel === "gemini-1.5-flash") {
+      user.selectedModel = "gemini-2.0-flash";
+      await user.save();
+    }
+
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 

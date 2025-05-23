@@ -8,10 +8,13 @@ import {
   FaSignOutAlt,
   FaBars,
   FaTimes,
+  FaCrown,
 } from "react-icons/fa";
 import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { logout } from "@/hooks/auth";
 import toast from "react-hot-toast";
+import SubscriptionDialog from "./SubscriptionDialog";
 
 interface SidebarProps {
   onLogout: () => void;
@@ -21,6 +24,7 @@ interface SidebarProps {
 
 const Sidebar = ({ onLogout, mobileOpen, setMobileOpen }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [subscriptionDialogOpen, setSubscriptionDialogOpen] = useState(false);
   const { user } = useAuthStore();
   const location = useLocation();
 
@@ -69,6 +73,32 @@ const Sidebar = ({ onLogout, mobileOpen, setMobileOpen }: SidebarProps) => {
     logout();
     onLogout();
     toast.success("Logged out successfully");
+  };
+
+  const getPlanDisplayName = (plan: string) => {
+    switch (plan) {
+      case "free":
+        return "Free";
+      case "basic":
+        return "Basic";
+      case "premium":
+        return "Premium";
+      default:
+        return "Free";
+    }
+  };
+
+  const getPlanColor = (plan: string) => {
+    switch (plan) {
+      case "free":
+        return "bg-gray-500";
+      case "basic":
+        return "bg-blue-500";
+      case "premium":
+        return "bg-purple-500";
+      default:
+        return "bg-gray-500";
+    }
   };
 
   return (
@@ -130,6 +160,15 @@ const Sidebar = ({ onLogout, mobileOpen, setMobileOpen }: SidebarProps) => {
                     {user?.name || "User"}
                   </p>
                   <p className="text-xs text-white/70">{user?.email || ""}</p>
+                  <div className="mt-1">
+                    <Badge
+                      className={`text-xs ${getPlanColor(
+                        user?.subscription?.plan || "free"
+                      )} text-white`}
+                    >
+                      {getPlanDisplayName(user?.subscription?.plan || "free")}
+                    </Badge>
+                  </div>
                 </div>
               )}
             </div>
@@ -163,6 +202,29 @@ const Sidebar = ({ onLogout, mobileOpen, setMobileOpen }: SidebarProps) => {
               </li>
             ))}
           </ul>
+
+          {/* Subscription Button */}
+          <div className="mt-6 px-2">
+            <button
+              onClick={() => setSubscriptionDialogOpen(true)}
+              className={`
+                flex items-center ${
+                  collapsed ? "justify-center px-2" : "px-4"
+                } py-3.5 
+                rounded-xl transition-all group relative w-full
+                bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600
+                text-white font-medium shadow-sm
+              `}
+            >
+              <FaCrown className="flex-shrink-0" size={20} />
+              {!collapsed && <span className="ml-3">Subscribe</span>}
+              {collapsed && (
+                <div className="absolute left-full ml-4 px-3 py-2 bg-slate text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-md border border-white/10">
+                  Subscribe
+                </div>
+              )}
+            </button>
+          </div>
         </nav>
         <div className="p-6 mt-auto border-t border-white/10">
           <button
@@ -190,6 +252,11 @@ const Sidebar = ({ onLogout, mobileOpen, setMobileOpen }: SidebarProps) => {
         className={`transition-all duration-300 ${
           collapsed ? "md:ml-24" : "md:ml-72"
         }`}
+      />
+
+      <SubscriptionDialog
+        open={subscriptionDialogOpen}
+        onOpenChange={setSubscriptionDialogOpen}
       />
     </>
   );

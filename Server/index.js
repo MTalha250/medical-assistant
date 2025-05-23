@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import messageRoutes from "./routes/message.js";
 import recordRoutes from "./routes/record.js";
+import subscriptionRoutes from "./routes/subscription.js";
 dotenv.config();
 const app = express();
 app.use(express.json({ limit: "10mb" }));
@@ -38,6 +39,7 @@ db.on("disconnected", () => {
 app.use("/auth", authRoutes);
 app.use("/messages", messageRoutes);
 app.use("/records", recordRoutes);
+app.use("/subscription", subscriptionRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
